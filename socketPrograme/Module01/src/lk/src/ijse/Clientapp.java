@@ -18,10 +18,10 @@ public class Clientapp {
 
             while (!massage.equals("finish")) {
 
-                massage = dataInputStream.readUTF();
-                System.out.println(massage);
                 reply = bufferedReader.readLine();
                 dataOutputStream.writeUTF(reply);
+                massage = dataInputStream.readUTF();
+                System.out.println(massage);
                 dataOutputStream.flush();
             }
             dataInputStream.close();

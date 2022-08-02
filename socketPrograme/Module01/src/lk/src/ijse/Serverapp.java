@@ -1,0 +1,27 @@
+package lk.src.ijse;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Serverapp {
+    public static void main(String args[]) throws IOException {
+        final int PORT = 8000;
+        ServerSocket serverSocket = new ServerSocket(PORT);
+
+        System.out.println("Server is ranning in port : " + PORT);
+
+        Socket localSocket = serverSocket.accept();
+        System.out.println("Port"+localSocket.getPort());
+        System.out.println("Ip"+localSocket.getInetAddress());
+
+        InputStreamReader inputStreamReader = new InputStreamReader(localSocket.getInputStream());
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String clientMag = bufferedReader.readLine();
+
+        System.out.println("client says: "+clientMag);
+    }
+}

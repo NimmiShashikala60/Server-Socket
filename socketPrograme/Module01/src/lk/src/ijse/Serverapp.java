@@ -5,36 +5,45 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Serverapp {
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
         final int PORT = 8000;
-        ServerSocket serverSocket = new ServerSocket(PORT);
+        try {
+            ServerSocket serverSocket = new ServerSocket(PORT);
 
-        System.out.println("Server is ranning in port : " + PORT);
 
-        Socket localSocket = serverSocket.accept();
-       // System.out.println("Port"+localSocket.getPort());
-       // System.out.println("Ip"+localSocket.getInetAddress());
-        System.out.println("client accept..");
+            System.out.println("Server is ranning in port : " + PORT);
 
-       // InputStreamReader inputStreamReader = new InputStreamReader(localSocket.getInputStream());
-       // BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-       // String clientMag = bufferedReader.readLine();
+            Socket localSocket = serverSocket.accept();
+            // System.out.println("Port"+localSocket.getPort());
+            // System.out.println("Ip"+localSocket.getInetAddress());
+            System.out.println("client accept..");
 
-        //System.out.println("client says: "+clientMag);
-        DataOutputStream dataOutputStream = new DataOutputStream(localSocket.getOutputStream());
-        DataInputStream dataInputStream = new DataInputStream(localSocket.getInputStream());
+            // InputStreamReader inputStreamReader = new InputStreamReader(localSocket.getInputStream());
+            // BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            // String clientMag = bufferedReader.readLine();
 
-        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            //System.out.println("client says: "+clientMag);
+            DataOutputStream dataOutputStream = new DataOutputStream(localSocket.getOutputStream());
+            DataInputStream dataInputStream = new DataInputStream(localSocket.getInputStream());
 
-        String massage = "",reply="";
+            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        while (!massage.equals("finish")){
-              massage=dataInputStream.readUTF();
-            System.out.println(massage);
-            reply=bufferedReader.readLine();
-            dataOutputStream.writeUTF(reply);
-            dataOutputStream.flush();
+            String massage = "", reply = "";
+
+            while (!massage.equals("finish")) {
+                massage = dataInputStream.readUTF();
+                System.out.println(massage);
+                reply = bufferedReader.readLine();
+                dataOutputStream.writeUTF(reply);
+                dataOutputStream.flush();
+
+                dataInputStream.close();
+                dataOutputStream.close();
+                bufferedReader.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

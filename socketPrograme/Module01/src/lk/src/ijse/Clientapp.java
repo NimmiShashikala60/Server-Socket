@@ -17,10 +17,11 @@ public class Clientapp {
             String massage = "", reply = "";
 
             while (!massage.equals("finish")) {
-                reply = bufferedReader.readLine();
-                dataOutputStream.writeUTF(reply);
+
                 massage = dataInputStream.readUTF();
                 System.out.println(massage);
+                reply = bufferedReader.readLine();
+                dataOutputStream.writeUTF(reply);
                 dataOutputStream.flush();
             }
             dataInputStream.close();

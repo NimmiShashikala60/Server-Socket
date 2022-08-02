@@ -33,7 +33,7 @@ public class Serverapp {
 
             while (!massage.equals("finish")) {
                 massage = dataInputStream.readUTF();
-                System.out.println(massage);
+                System.out.println("Client says, :" +massage);
                 reply = bufferedReader.readLine();
                 dataOutputStream.writeUTF(reply);
                 dataOutputStream.flush();

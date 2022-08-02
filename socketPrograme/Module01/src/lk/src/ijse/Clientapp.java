@@ -21,7 +21,7 @@ public class Clientapp {
                 reply = bufferedReader.readLine();
                 dataOutputStream.writeUTF(reply);
                 massage = dataInputStream.readUTF();
-                System.out.println(massage);
+                System.out.println("Server says, :" +massage);
                 dataOutputStream.flush();
             }
             dataInputStream.close();
